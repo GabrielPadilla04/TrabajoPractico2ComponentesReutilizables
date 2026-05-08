@@ -1,0 +1,49 @@
+﻿@page "/lista-personas"
+@using TrabajoPractico2ComponentesReutilizables.Models
+
+<h3>Lista de Personas</h3>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Domicilio</th>
+            <th>Nacimiento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in personas)
+        {
+            <tr>
+                <td><img src="@p.RutaImagen" width="50" class="rounded-circle" /></td>
+                <td>@p.NombreCompleto</td>
+                <td>@p.Email</td>
+                <td>@p.Domicilio</td>
+                <td>@p.FechaNacimiento.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Persona> personas = new();
+
+    protected override void OnInitialized()
+    {
+        // Inicializar con 10 instancias ficticias
+        for (int i = 1; i <= 10; i++)
+        {
+            personas.Add(new Persona
+            {
+                Id = i,
+                NombreCompleto = $"Persona {i}",
+                Email = $"persona{i}@correo.com",
+                Domicilio = $"Calle Falsa {123 + i}",
+                FechaNacimiento = new DateTime(1990 + i, 01, 01),
+                RutaImagen = "Descargas/moto.jpg"
+            });
+        }
+    }
+}

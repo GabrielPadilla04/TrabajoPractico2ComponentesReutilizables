@@ -1,0 +1,40 @@
+﻿@page "/login"
+
+<div class="card p-4 shadow-sm" style="max-width: 400px; margin: auto;">
+    <h3>Control de Acceso</h3>
+    <div class="mb-3">
+        <label>Usuario</label>
+        <input type="text" class="form-control" @bind="usuario" />
+    </div>
+    <div class="mb-3">
+        <label>Contraseña</label>
+        <input type="password" class="form-control" @bind="password" />
+    </div>
+    <button class="btn btn-primary" @onclick="VerificarAcceso">Ingresar</button>
+
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="alert @claseMensaje mt-3">@mensaje</div>
+    }
+</div>
+
+@code {
+    private string usuario = "";
+    private string password = "";
+    private string mensaje = "";
+    private string claseMensaje = "";
+
+    private void VerificarAcceso()
+    {
+        if (usuario == "alumno" && password == "1234")
+        {
+            mensaje = "Acceso concedido. ¡Bienvenido!";
+            claseMensaje = "alert-success";
+        }
+        else
+        {
+            mensaje = "Credenciales incorrectas.";
+            claseMensaje = "alert-danger";
+        }
+    }
+}
